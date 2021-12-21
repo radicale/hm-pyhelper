@@ -28,7 +28,7 @@ def run_gateway_mfr(args):
     command = [gateway_mfr_path]
 
     try:
-        extra_args = ['--path',
+        extra_args = ['--path', "/dev/" +
                       get_variant_attribute(os.getenv('VARIANT'), 'ECCBUS')]
         command.extend(extra_args)
     except (UnknownVariantException, UnknownVariantAttributeException) as e:
