@@ -28,11 +28,13 @@ def run_gateway_mfr(args):
     command = [gateway_mfr_path]
 
     try:
-        extra_args = ['--path', "/dev/" +
-                      get_variant_attribute(os.getenv('VARIANT'), 'ECCBUS')]
-        command.extend(extra_args)
+        path_arg = [
+            '--path',
+            get_variant_attribute(os.getenv('VARIANT'), 'KEY_STORAGE_BUS')
+        ]
+        command.extend(path_arg)
     except (UnknownVariantException, UnknownVariantAttributeException) as e:
-        LOGGER.exception(e)
+        LOGGER.warning(str(e) + ' Omitting --path arg.')
 
     command.extend(args)
 
